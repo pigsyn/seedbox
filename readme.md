@@ -16,6 +16,6 @@ web|demo|demo
 transmission rpc|demo|demo
 
 ## Docker apps:
-  - sickchill/sickchill
-  - linuxserver/ngninx
-  - linuxserver/transmission
+  - https://hub.docker.com/r/sickchill/sickchill
+  - https://hub.docker.com/r/linuxserver/nginx
+  - https://hub.docker.com/r/linuxserver/transmission
