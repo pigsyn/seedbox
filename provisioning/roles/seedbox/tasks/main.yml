@@ -1,0 +1,74 @@
+---
+- name: specific tools
+  become: yes
+  apt: 
+    name: ['docker.io', 'sqlite3', 'vnstat', 'docker-compose']
+    update_cache: yes 
+    state: latest
+
+- name: make torrent paths
+  become: yes
+  file:
+    path: "{{ item.0.root_dir }}/{{ item.1 }}"
+    state: "{{ item.0.state }}"
+    owner: "{{ item.0.owner }}"
+    group: "{{ item.0.group }}"
+    mode : "{{ item.0.mode }}"
+  with_subelements: 
+    - "{{ paths_to_create }}"
+    - subdirs
+
+- name: make symlinks
+  become: yes
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: '{{ item.owner }}'
+    group: '{{ item.group }}'
+    state: link
+  with_items: 
+    - "{{ links_to_create }}"
+
+- name: copy docker scripts
+  copy:
+    src: "{{ item }}"
+    dest: /root/
+    mode:  0640
+  with_fileglob:
+    - files/docker-compose.yml
+
+- name : copy sickchill conf
+  copy:
+    src: files/config.ini
+    dest: /home/torrent/sickchill/config/
+    mode: 0640
+    owner: torrent
+    group: torrent
+    force: no
+
+- name : copy transmission conf
+  copy:
+    src: files/settings.json
+    dest: /home/torrent/transmission/config/
+    mode: 0600
+    owner: torrent
+    group: torrent
+    force: no
+
+- name : copy htpasswd conf
+  copy:
+    src: files/htpasswd
+    dest: /home/torrent/nginx/nginx/.htpasswd
+    mode: 0660
+    owner: torrent
+    group: torrent
+    force: no
+
+- name : copy index.html
+  copy:
+    src: files/index.html
+    dest: /home/torrent/nginx/www/
+    mode: 0660
+    owner: torrent
+    group: torrent
+    force: no

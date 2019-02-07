@@ -1,0 +1,52 @@
+version: '2'
+services:
+  sickchill:
+    image: sickchill/sickchill
+    networks:
+      - netbridge
+    volumes:
+      - /home/torrent/sickchill/config:/data
+      - /home/torrent/transmission/downloads:/downloads
+      - /home/torrent/sickchill/tv:/tv
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=Europe/Paris 
+    restart: always
+  
+  transmission:
+    image: linuxserver/transmission
+    networks:
+      - netbridge
+    ports:
+      - 51413:51413
+      - 51413:51413/udp
+    volumes:
+      - /home/torrent/transmission/config:/config
+      - /home/torrent/transmission/downloads:/downloads
+      - /home/torrent/transmission/watch:/watch
+      - /home/torrent/sickchill/tv:/tv
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=Europe/Paris
+    restart: always
+
+  nginx:
+    image: linuxserver/nginx
+    networks:
+      - netbridge
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /home/torrent/nginx:/config
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=Europe/Paris
+    restart: always
+
+networks:
+  netbridge:
+    driver: bridge

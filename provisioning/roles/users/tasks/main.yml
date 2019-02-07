@@ -1,0 +1,50 @@
+---
+- name: users | Make sure all groups are present
+  when: genericusers_groups is defined
+  group:
+    name: "{{ item.name }}"
+    system: "{{ item.system | default(omit) }}"
+    gid: "{{ item.gid | default(omit) }}"
+    state: present
+  with_items: "{{ genericusers_groups }}"
+
+
+- name: Make sure the users are present
+  when: genericusers_users is defined
+  user:
+    name: "{{ item.name }}"
+    groups: "{{ ','.join(item.groups) | default(omit) }}"
+    append: "{{ item.append | default(omit) }}"
+    password: "{{ item.pass | default(omit) }}"
+    comment: "{{ item.comment | default(omit) }}"
+    shell: "{{ item.shell | default(omit) }}"
+    uid: "{{ item.uid | default(omit) }}"
+    home: "{{ item.home | default(omit) }}"
+    system: "{{ item.system | default(omit) }}"
+    state: present
+  with_items: "{{ genericusers_users }}"
+
+- name: users | Install the ssh keys for the users
+  authorized_key:
+    user: "{{item.0.name}}"
+    key: "{{item.1}}"
+  with_subelements:
+    - "{{ genericusers_users }}"
+    - ssh_keys
+    - skip_missing: yes
+
+- name: users | Make sure all removed users are not present
+  when: genericusers_users_removed is defined
+  user:
+    name: "{{item.name}}"
+    state: absent
+    remove: yes
+  with_items: "{{ genericusers_users_removed }}"
+
+- name: users | Make sure all removed groups are not present
+  when: genericusers_groups_removed is defined
+  group:
+    name: "{{ item.name }}"
+    state: absent
+  with_items: "{{ genericusers_groups_removed }}"
+...

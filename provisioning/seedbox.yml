@@ -1,0 +1,10 @@
+---
+- name: Deploy Seedbox
+  hosts: all 
+  roles:
+    - tools
+    - users
+    - seedbox
+    - web
+...
+

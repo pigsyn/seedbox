@@ -1,0 +1,63 @@
+paths_to_create:
+  - root_dir: /home/torrent
+    subdirs: 
+      - sickchill
+      - sickchill/config
+      - transmission
+      - transmission/config
+      - transmission/watch
+      - nginx
+    owner: torrent
+    group: torrent
+    mode: "0750"
+    state: directory
+
+  - root_dir: /home/torrent
+    subdirs: 
+      - transmission/downloads
+      - transmission/downloads/complete
+      - transmission/downloads/incomplete
+      - sickchill/tv
+    owner: torrent
+    group: torrent
+    mode: "2770"
+    state: directory
+
+  - root_dir: /home/torrent
+    subdirs: 
+      - nginx
+      - nginx/nginx/site-confs
+    owner: torrent
+    group: torrent
+    mode: "0770"
+    state: directory
+
+  - root_dir: /var
+    subdirs: 
+      - backup_conf
+    owner: torrent
+    group: torrent
+    mode: "0750"
+    state: directory
+
+links_to_create:
+  - dest: /home/torrent/sickchill/downloads
+    src: /home/torrent/transmission/downloads/complete
+    owner: torrent
+    group: torrent
+    
+  - dest: /tv
+    src: /home/torrent/sickchill/tv
+    owner: torrent
+    group: torrent
+    
+  - dest: /home/user1/tv
+    src: /home/torrent/sickchill/tv
+    owner: torrent
+    group: torrent
+
+  - dest: /home/user1/downloads
+    src: /home/torrent/transmission/downloads/complete
+    owner: torrent
+    group: torrent
+

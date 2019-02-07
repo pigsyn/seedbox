@@ -1,0 +1,10 @@
+---
+- name : copy nginx conf
+  template:
+    src: nginx_default.j2
+    dest: /home/torrent/nginx/nginx/site-confs/default
+    backup: no
+    mode: 0660
+    owner: torrent
+    group: torrent
+...
