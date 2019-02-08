@@ -32,7 +32,7 @@
 
 - name : copy sickchill conf
   copy:
-    src: files/sickchill/sickchill.conf
+    src: files/sickchill/config.ini
     dest: /home/torrent/sickchill/config/config.ini
     mode: 0640
     owner: torrent
