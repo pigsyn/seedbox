@@ -7,6 +7,8 @@ paths_to_create:
       - transmission/config
       - transmission/watch
       - nginx
+      - headphones
+      - jackett/data
     owner: torrent
     group: torrent
     mode: "0750"
@@ -18,6 +20,9 @@ paths_to_create:
       - transmission/downloads/complete
       - transmission/downloads/incomplete
       - sickchill/tv
+      - headphones/data
+      - headphones/music
+      - jackett/data/Jackett
     owner: torrent
     group: torrent
     mode: "2770"
@@ -60,4 +65,3 @@ links_to_create:
     src: /home/torrent/transmission/downloads/complete
     owner: torrent
     group: torrent
-

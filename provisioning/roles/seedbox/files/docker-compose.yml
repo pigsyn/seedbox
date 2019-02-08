@@ -46,6 +46,33 @@ services:
       - PUID=1001
       - TZ=Europe/Paris
     restart: always
+    
+  headphones:
+    image: linuxserver/headphones
+    networks:
+      - netbridge
+    volumes:
+      - /home/torrent/headphones/data:/config
+      - /home/torrent/transmission/downloads:/downloads
+      - /home/torrent/headphones/music:/music
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=Europe/Paris
+    restart: always
+    
+  jackett:
+    image: linuxserver/jackett
+    networks:
+      - netbridge
+    volumes:
+      - /home/torrent/jackett/data:/config
+      - /home/torrent/transmission/downloads:/downloads
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=Europe/Paris
+    restart: always
 
 networks:
   netbridge:

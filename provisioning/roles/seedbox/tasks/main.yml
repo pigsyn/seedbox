@@ -1,11 +1,4 @@
 ---
-- name: specific tools
-  become: yes
-  apt: 
-    name: ['docker.io', 'sqlite3', 'vnstat', 'docker-compose']
-    update_cache: yes 
-    state: latest
-
 - name: make torrent paths
   become: yes
   file:
@@ -39,8 +32,8 @@
 
 - name : copy sickchill conf
   copy:
-    src: files/config.ini
-    dest: /home/torrent/sickchill/config/
+    src: files/sickchill/sickchill.conf
+    dest: /home/torrent/sickchill/config/config.ini
     mode: 0640
     owner: torrent
     group: torrent
@@ -48,7 +41,7 @@
 
 - name : copy transmission conf
   copy:
-    src: files/settings.json
+    src: files/transmission/settings.json
     dest: /home/torrent/transmission/config/
     mode: 0600
     owner: torrent
@@ -57,7 +50,7 @@
 
 - name : copy htpasswd conf
   copy:
-    src: files/htpasswd
+    src: files/nginx/htpasswd
     dest: /home/torrent/nginx/nginx/.htpasswd
     mode: 0660
     owner: torrent
@@ -66,9 +59,27 @@
 
 - name : copy index.html
   copy:
-    src: files/index.html
+    src: files/nginx/index.html
     dest: /home/torrent/nginx/www/
     mode: 0660
+    owner: torrent
+    group: torrent
+    force: yes
+
+- name : copy headphones conf
+  copy:
+    src: files/headphones/config.ini
+    dest: /home/torrent/headphones/data/config.ini
+    mode: 0640
+    owner: torrent
+    group: torrent
+    force: no
+
+- name : copy jackett conf
+  copy:
+    src: files/jackett/ServerConfig.json
+    dest: /home/torrent/jackett/data/Jackett/ServerConfig.json
+    mode: 0640
     owner: torrent
     group: torrent
     force: no

@@ -3,7 +3,7 @@ genericusers_groups: []
 genericusers_users:
   - name: torrent
     shell: /bin/false
-    groups: []
+    groups: [docker]
     
   - name: user1
     shell: "/bin/bash"
