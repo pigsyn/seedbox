@@ -49,24 +49,11 @@
   with_items: "{{ genericusers_groups_removed }}"
   
 - name: users | make convenient symlinks
-  when: item.make_links is defined and item.make_links == true
+  when: item.0.make_links is defined and item.0.make_links == true
   file:
-    dest: "/home/{{item.name}}/music"
-    src: /home/torrent/headphones/music
+    dest: "/home/{{item.0.name}}/{{item.1.name}}"
+    src: "{{ item.1.path }}"
     state: link
-    owner: torrent
-    group: torrent
-  file:
-    dest: "/home/{{item.name}}/tv"
-    src: /home/torrent/sickchill/tv
-    state: link
-    owner: torrent
-    group: torrent
-  file:
-    dest: "/home/{{item.name}}/downloads"
-    src: /home/torrent/downloads/complete
-    state: link
-    owner: torrent
-    group: torrent
-  with_items: "{{ genericusers_users }}"
+    force: yes
+  loop: "{{ genericusers_users|product(user_links)|list }}"
 ...
