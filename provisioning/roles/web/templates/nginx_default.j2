@@ -1,6 +1,6 @@
 server {
     listen 80 default_server;
-    server_name {{ ansible_facts['fqdn'] }};
+    server_name _;
     return 301 https://$server_name$request_uri;
 }
 
@@ -50,10 +50,11 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
     #headphones
-    location /headphones {
+    location /headphones/ {
         proxy_pass_request_headers on;
         proxy_pass http://headphones:8181;
-        #proxy_set_header Host $host;
+        proxy_redirect http://headphones:8181/ https://$host:8081/;
+        proxy_set_header X-Forwarded-Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
