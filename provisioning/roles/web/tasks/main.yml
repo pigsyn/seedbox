@@ -7,4 +7,22 @@
     mode: 0660
     owner: torrent
     group: torrent
+    
+ - name : copy htpasswd conf
+  copy:
+    src: files/nginx/htpasswd
+    dest: /home/torrent/nginx/nginx/.htpasswd
+    mode: 0660
+    owner: torrent
+    group: torrent
+    force: no
+
+- name : copy index.html
+  copy:
+    src: files/nginx/index.html
+    dest: /home/torrent/nginx/www/
+    mode: 0660
+    owner: torrent
+    group: torrent
+    force: yes
 ...

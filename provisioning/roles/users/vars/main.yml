@@ -9,4 +9,5 @@ genericusers_users:
     shell: "/bin/bash"
     groups: [adm, sudo, cdrom, dip, plugdev, lxd, torrent]
     pass: "$6$9bXZx/r1PA$mZesQxz.JWPwyHRgIMT6tMaNYxNUDsE7IddVT7M0t4UtiblUXmRp9y7ec8Z8TqOEMrIbjNvec4TOOxfTJL6Wa1"
+    make_links: true
 ...

@@ -9,7 +9,7 @@
   with_items: "{{ genericusers_groups }}"
 
 
-- name: Make sure the users are present
+- name: users | Make sure the users are present
   when: genericusers_users is defined
   user:
     name: "{{ item.name }}"
@@ -47,4 +47,26 @@
     name: "{{ item.name }}"
     state: absent
   with_items: "{{ genericusers_groups_removed }}"
+  
+- name: users | make convenient symlinks
+  when: item.make_links is defined and item.make_links == true
+  file:
+    dest: "/home/{{item.name}}/music"
+    src: /home/torrent/headphones/music
+    state: link
+    owner: torrent
+    group: torrent
+  file:
+    dest: "/home/{{item.name}}/tv"
+    src: /home/torrent/sickchill/tv
+    state: link
+    owner: torrent
+    group: torrent
+  file:
+    dest: "/home/{{item.name}}/downloads"
+    src: /home/torrent/downloads/complete
+    state: link
+    owner: torrent
+    group: torrent
+  with_items: "{{ genericusers_users }}"
 ...
