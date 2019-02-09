@@ -39,11 +39,11 @@
     group: torrent
     force: no
 
-- name : copy transmission conf
+- name : copy qBittorent conf
   copy:
-    src: files/transmission/settings.json
-    dest: /home/torrent/transmission/config/
-    mode: 0600
+    src: files/qbittorrent/qBittorrent.conf
+    dest: /home/torrent/qbittorrent/config/qBittorrent/
+    mode: 0640
     owner: torrent
     group: torrent
     force: no

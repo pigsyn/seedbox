@@ -3,9 +3,7 @@ paths_to_create:
     subdirs: 
       - sickchill
       - sickchill/config
-      - transmission
-      - transmission/config
-      - transmission/watch
+      - qbittorrent/config/qBittorrent
       - nginx
       - headphones
       - jackett/data
@@ -16,9 +14,10 @@ paths_to_create:
 
   - root_dir: /home/torrent
     subdirs: 
-      - transmission/downloads
-      - transmission/downloads/complete
-      - transmission/downloads/incomplete
+      - downloads
+      - downloads/complete
+      - downloads/incomplete
+      - downloads/watch
       - sickchill/tv
       - headphones/data
       - headphones/music
@@ -47,7 +46,7 @@ paths_to_create:
 
 links_to_create:
   - dest: /home/torrent/sickchill/downloads
-    src: /home/torrent/transmission/downloads/complete
+    src: /home/torrent/downloads/complete
     owner: torrent
     group: torrent
     
@@ -62,6 +61,6 @@ links_to_create:
     group: torrent
 
   - dest: /home/user1/downloads
-    src: /home/torrent/transmission/downloads/complete
+    src: /home/torrent/downloads/complete
     owner: torrent
     group: torrent

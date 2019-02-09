@@ -42,12 +42,15 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
-    # transmission reverse proxy
-    location /transmission {
-        proxy_pass http://transmission:9091;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	# qbittorrent
+	location /qbt/ {
+        proxy_pass              http://qbittorrent:8080/;
+        proxy_set_header        X-Forwarded-Host        $server_name:$server_port;
+        proxy_hide_header       Referer;
+        proxy_hide_header       Origin;
+        proxy_set_header        Referer                 '';
+        proxy_set_header        Origin                  '';
+        add_header              X-Frame-Options         "SAMEORIGIN"; # see note
     }
     #headphones
     location /headphones/ {
