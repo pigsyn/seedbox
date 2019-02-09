@@ -19,3 +19,4 @@ transmission rpc|demo|demo
   - https://hub.docker.com/r/sickchill/sickchill
   - https://hub.docker.com/r/linuxserver/nginx
   - https://hub.docker.com/r/linuxserver/transmission
+  - https://hub.docker.com/r/linuxserver/jackett
