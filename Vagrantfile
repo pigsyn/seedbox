@@ -20,8 +20,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     torrent_uid=$(grep torrent /etc/passwd|cut -d ':' -f 3)
     sed -i "s/1001/${torrent_uid}/g" /root/docker-compose.yml
-	systemctl enable docker
-	service docker start
+    systemctl enable docker
+    service docker start
     docker-compose -f /root/docker-compose.yml up -d
   SHELL
 end
