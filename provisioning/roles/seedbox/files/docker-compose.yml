@@ -49,7 +49,6 @@ services:
       - netbridge
     volumes:
       - /home/torrent/jackett/data:/config
-      - /home/torrent/downloads:/downloads
     environment:
       - PGID=1001
       - PUID=1001

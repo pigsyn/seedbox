@@ -13,10 +13,10 @@ type|user|password
 ---|---|----
 linux|user1|demo
 web|demo|demo
-transmission rpc|demo|demo
+qbittorrent|admin|adminadmin
 
 ## Docker apps:
   - https://hub.docker.com/r/sickchill/sickchill
   - https://hub.docker.com/r/linuxserver/nginx
-  - https://hub.docker.com/r/linuxserver/transmission
+  - https://hub.docker.com/r/linuxserver/qbittorrent
   - https://hub.docker.com/r/linuxserver/jackett
