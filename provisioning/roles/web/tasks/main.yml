@@ -8,7 +8,7 @@
     owner: torrent
     group: torrent
     
- - name : copy htpasswd conf
+- name : copy htpasswd conf
   copy:
     src: files/nginx/htpasswd
     dest: /home/torrent/nginx/nginx/.htpasswd
