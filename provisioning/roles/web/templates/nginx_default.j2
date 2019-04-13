@@ -34,7 +34,7 @@ server {
 
     }
     # sickchill reverse proxy
-    location /sickchill { 
+    location /sickchill {
         proxy_pass http://sickchill:8081;
         #proxy_redirect off;
         #proxy_set_header Host $http_host;
@@ -42,8 +42,8 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
-	# qbittorrent
-	location /qbt/ {
+	 # qbittorrent
+	 location /qbt/ {
         proxy_pass              http://qbittorrent:8080/;
         proxy_set_header        X-Forwarded-Host        $server_name:$server_port;
         proxy_hide_header       Referer;
@@ -52,10 +52,11 @@ server {
         proxy_set_header        Origin                  '';
         add_header              X-Frame-Options         "SAMEORIGIN"; # see note
     }
-    #headphones
+    # headphones
     location /headphones/ {
         proxy_pass_request_headers on;
         proxy_pass http://headphones:8181;
+        # comment next line when using public ip & fqdn
         proxy_redirect http://headphones:8181/ https://$host:8081/;
         proxy_set_header X-Forwarded-Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
