@@ -1,11 +1,11 @@
 version: '2'
 services:
   sickchill:
-    image: sickchill/sickchill
+    image: linuxserver/sickchill
     networks:
       - netbridge
     volumes:
-      - /home/torrent/sickchill/config:/data
+      - /home/torrent/sickchill/config:/config
       - /home/torrent/downloads:/downloads
       - /home/torrent/sickchill/tv:/tv
     environment:
