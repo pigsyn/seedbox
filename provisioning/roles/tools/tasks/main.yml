@@ -13,7 +13,7 @@
 - name: Install Generic Tools
   become: yes
   apt: 
-    name: ['htop', 'vim', 'git', 'iftop', 'acl', 'apache2-utils', 'whois', 'docker.io', 'sqlite3', 'docker-compose']
+    name: ['htop', 'vim', 'git', 'iftop', 'acl', 'apache2-utils', 'whois', 'docker.io', 'sqlite3', 'docker-compose', 'cifs-utils']
     update_cache: yes 
     cache_valid_time: 3600
     state: latest
