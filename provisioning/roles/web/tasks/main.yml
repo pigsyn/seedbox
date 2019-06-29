@@ -1,5 +1,5 @@
 ---
-- name : copy nginx conf
+- name : copy site template
   template:
     src: nginx_default.j2
     dest: /home/torrent/nginx/nginx/site-confs/default
@@ -25,4 +25,13 @@
     owner: torrent
     group: torrent
     force: yes
+
+- name : copy charset conf
+  template:
+    src: files/nginx/charset.conf
+    dest: /home/torrent/nginx/nginx/site-confs/
+    backup: no
+    mode: 0660
+    owner: torrent
+    group: torrent
 ...
