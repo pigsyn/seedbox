@@ -2,6 +2,7 @@ version: '2'
 services:
   sickchill:
     image: sickchill/sickchill
+    container_name: sickchill
     networks:
       - netbridge
     volumes:
@@ -11,11 +12,13 @@ services:
     environment:
       - PGID=1001
       - PUID=1001
-      - TZ=Europe/Paris 
+      - TZ=Europe/Paris
     restart: always
-  
+    depends_on:
+      - nginx
   nginx:
     image: linuxserver/nginx
+    container_name: nginx
     networks:
       - netbridge
     ports:
@@ -28,9 +31,9 @@ services:
       - PUID=1001
       - TZ=Europe/Paris
     restart: always
-    
   headphones:
     image: linuxserver/headphones
+    container_name: headphones
     networks:
       - netbridge
     volumes:
@@ -42,9 +45,11 @@ services:
       - PUID=1001
       - TZ=Europe/Paris
     restart: always
-    
+    depends_on:
+      - nginx
   jackett:
     image: linuxserver/jackett
+    container_name: jackett
     networks:
       - netbridge
     volumes:
@@ -54,9 +59,11 @@ services:
       - PUID=1001
       - TZ=Europe/Paris
     restart: always
-    
+    depends_on:
+      - nginx
   qbittorrent:
     image: linuxserver/qbittorrent
+    container_name: qbittorrent
     networks:
       - netbridge
     ports:
@@ -71,7 +78,8 @@ services:
       - PUID=1001
       - TZ=Europe/Paris
     restart: always
-
+    depends_on:
+      - nginx
 networks:
   netbridge:
     driver: bridge
