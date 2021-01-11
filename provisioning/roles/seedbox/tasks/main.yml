@@ -7,7 +7,7 @@
     owner: "{{ item.0.owner }}"
     group: "{{ item.0.group }}"
     mode : "{{ item.0.mode }}"
-  with_subelements: 
+  with_subelements:
     - "{{ paths_to_create }}"
     - subdirs
 
@@ -19,7 +19,7 @@
     owner: '{{ item.owner }}'
     group: '{{ item.group }}'
     state: link
-  with_items: 
+  with_items:
     - "{{ links_to_create }}"
 
 - name: copy docker scripts
@@ -61,6 +61,24 @@
   copy:
     src: files/jackett/ServerConfig.json
     dest: /home/torrent/jackett/data/Jackett/ServerConfig.json
+    mode: 0640
+    owner: torrent
+    group: torrent
+    force: no
+
+- name : copy grafana conf
+  copy:
+    src: files/monitoring/grafana.ini
+    dest: /home/torrent/monitoring/grafana.ini
+    mode: 0640
+    owner: torrent
+    group: torrent
+    force: no
+
+- name : copy prometheus conf
+  copy:
+    src: files/monitoring/prometheus.yml
+    dest: /home/torrent/monitoring/prometheus.yml
     mode: 0640
     owner: torrent
     group: torrent

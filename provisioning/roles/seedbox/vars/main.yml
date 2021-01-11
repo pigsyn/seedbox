@@ -1,19 +1,20 @@
 paths_to_create:
   - root_dir: /home/torrent
-    subdirs: 
+    subdirs:
       - sickchill
       - sickchill/config
       - qbittorrent/config/qBittorrent
       - nginx
       - headphones
       - jackett/data
+      - monitoring
     owner: torrent
     group: torrent
     mode: "0750"
     state: directory
 
   - root_dir: /home/torrent
-    subdirs: 
+    subdirs:
       - downloads
       - downloads/complete
       - downloads/incomplete
@@ -22,22 +23,24 @@ paths_to_create:
       - headphones/data
       - headphones/music
       - jackett/data/Jackett
+      - monitoring/grafana-storage
     owner: torrent
     group: torrent
     mode: "2770"
     state: directory
 
   - root_dir: /home/torrent
-    subdirs: 
+    subdirs:
       - nginx
       - nginx/nginx/site-confs
+      - nginx/www/.well-known
     owner: torrent
     group: torrent
     mode: "0770"
     state: directory
 
   - root_dir: /var
-    subdirs: 
+    subdirs:
       - backup_conf
     owner: torrent
     group: torrent
@@ -49,7 +52,7 @@ links_to_create:
     src: /home/torrent/downloads/complete
     owner: torrent
     group: torrent
-    
+
   - dest: /tv
     src: /home/torrent/sickchill/tv
     owner: torrent
